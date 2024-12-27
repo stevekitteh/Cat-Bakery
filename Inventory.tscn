@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://cpqdbcayfg87w"]
+
+[ext_resource type="Script" path="res://Inventory/Inventory.gd" id="1_ll67r"]
+[ext_resource type="Texture2D" uid="uid://d0c6qm2xcfum4" path="res://Images/blue.png" id="1_mu43i"]
+[ext_resource type="Script" path="res://Inventory/InventoryBox.gd" id="3_04v2d"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_lpv80"]
+font_size = 80
+font_color = Color(0, 0, 0, 1)
+
+[node name="Inventory" type="Node2D"]
+script = ExtResource("1_ll67r")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 1150.0
+offset_bottom = 648.0
+texture = ExtResource("1_mu43i")
+
+[node name="InventoryName" type="Label" parent="."]
+offset_left = 388.0
+offset_top = 3.0
+offset_right = 761.0
+offset_bottom = 113.0
+text = "Inventory"
+label_settings = SubResource("LabelSettings_lpv80")
+horizontal_alignment = 1
+
+[node name="BackButton" type="Button" parent="."]
+offset_left = 981.0
+offset_top = 17.0
+offset_right = 1117.0
+offset_bottom = 89.0
+text = "Back"
+
+[node name="InventoryBox" type="VBoxContainer" parent="."]
+layout_direction = 2
+offset_left = 48.0
+offset_top = 136.0
+offset_right = 1117.0
+offset_bottom = 613.0
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+script = ExtResource("3_04v2d")
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

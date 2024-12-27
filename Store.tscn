@@ -1,0 +1,307 @@
+[gd_scene load_steps=14 format=3 uid="uid://cr4oaa1lbhds6"]
+
+[ext_resource type="Script" path="res://Store/Store.gd" id="1_3hmyf"]
+[ext_resource type="Texture2D" uid="uid://dqtqhprrl27og" path="res://Images/yellow.png" id="1_o2qx6"]
+[ext_resource type="Texture2D" uid="uid://defngwy67br7w" path="res://Images/wheat.png" id="2_7xdtm"]
+[ext_resource type="Texture2D" uid="uid://ciu4pxnhrf0q" path="res://Images/apple.png" id="3_ifhbf"]
+[ext_resource type="Script" path="res://Store/Purchase.gd" id="4_d7i3r"]
+[ext_resource type="Texture2D" uid="uid://dd8k3fhc4lwxk" path="res://Images/milk.png" id="6_5uraf"]
+[ext_resource type="Texture2D" uid="uid://d0pxsecow7mpm" path="res://Images/egg.png" id="7_e43us"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_lb836"]
+font_size = 80
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_o8x8l"]
+font_size = 30
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_yvgmx"]
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_2amsb"]
+font_size = 30
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_wlev1"]
+font_size = 30
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ibf8a"]
+font_size = 28
+font_color = Color(0, 0, 0, 1)
+
+[node name="Store" type="Node2D"]
+script = ExtResource("1_3hmyf")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(576.5, 324.5)
+scale = Vector2(2.71127, 1.54524)
+texture = ExtResource("1_o2qx6")
+
+[node name="StoreName" type="Label" parent="."]
+offset_left = 472.0
+offset_right = 677.0
+offset_bottom = 110.0
+text = "Store"
+label_settings = SubResource("LabelSettings_lb836")
+
+[node name="MoneyCount" type="Label" parent="."]
+offset_left = 50.0
+offset_top = 28.0
+offset_right = 192.0
+offset_bottom = 83.0
+text = "Money: $0"
+label_settings = SubResource("LabelSettings_o8x8l")
+
+[node name="NotEnoughMoney" type="Popup" parent="."]
+transparent_bg = true
+initial_position = 1
+size = Vector2i(623, 100)
+wrap_controls = false
+borderless = false
+transparent = true
+mouse_passthrough = true
+
+[node name="Label" type="Label" parent="NotEnoughMoney"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "You do not have enough money!"
+label_settings = SubResource("LabelSettings_yvgmx")
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 20.0
+offset_top = 21.0
+offset_right = 1174.0
+offset_bottom = 670.0
+
+[node name="BackButton" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 977.0
+offset_top = -6.0
+offset_right = 1113.0
+offset_bottom = 66.0
+text = "Back"
+
+[node name="ItemsContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.082
+anchor_top = 0.185
+anchor_right = 0.082
+anchor_bottom = 0.185
+offset_left = -10.628
+offset_top = -0.0650024
+offset_right = 472.372
+offset_bottom = 607.935
+
+[node name="WheatContainer" type="HBoxContainer" parent="Control/ItemsContainer"]
+custom_minimum_size = Vector2(150, 200)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+
+[node name="Image" type="TextureRect" parent="Control/ItemsContainer/WheatContainer"]
+layout_mode = 2
+texture = ExtResource("2_7xdtm")
+expand_mode = 2
+
+[node name="DetailsContainer" type="VBoxContainer" parent="Control/ItemsContainer/WheatContainer"]
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+script = ExtResource("4_d7i3r")
+
+[node name="FoodName" type="Label" parent="Control/ItemsContainer/WheatContainer/DetailsContainer"]
+layout_mode = 2
+text = "Wheat"
+label_settings = SubResource("LabelSettings_2amsb")
+
+[node name="Price" type="Label" parent="Control/ItemsContainer/WheatContainer/DetailsContainer"]
+layout_mode = 2
+text = "$1"
+label_settings = SubResource("LabelSettings_wlev1")
+
+[node name="QuantitySelector" type="HBoxContainer" parent="Control/ItemsContainer/WheatContainer/DetailsContainer"]
+layout_mode = 2
+
+[node name="DecrementButton" type="Button" parent="Control/ItemsContainer/WheatContainer/DetailsContainer/QuantitySelector"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "-"
+
+[node name="QuantityLabel" type="Label" parent="Control/ItemsContainer/WheatContainer/DetailsContainer/QuantitySelector"]
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_ibf8a")
+
+[node name="IncrementButton" type="Button" parent="Control/ItemsContainer/WheatContainer/DetailsContainer/QuantitySelector"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "+"
+
+[node name="PurchaseButton" type="Button" parent="Control/ItemsContainer/WheatContainer/DetailsContainer"]
+layout_mode = 2
+text = "Purchase"
+
+[node name="AppleContainer" type="HBoxContainer" parent="Control/ItemsContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="Control/ItemsContainer/AppleContainer"]
+layout_mode = 2
+texture = ExtResource("3_ifhbf")
+expand_mode = 2
+
+[node name="DetailsContainer" type="VBoxContainer" parent="Control/ItemsContainer/AppleContainer"]
+layout_mode = 2
+script = ExtResource("4_d7i3r")
+
+[node name="FoodName" type="Label" parent="Control/ItemsContainer/AppleContainer/DetailsContainer"]
+layout_mode = 2
+text = "Apple"
+label_settings = SubResource("LabelSettings_2amsb")
+
+[node name="Price" type="Label" parent="Control/ItemsContainer/AppleContainer/DetailsContainer"]
+layout_mode = 2
+text = "$5"
+label_settings = SubResource("LabelSettings_wlev1")
+
+[node name="QuantitySelector" type="HBoxContainer" parent="Control/ItemsContainer/AppleContainer/DetailsContainer"]
+layout_mode = 2
+
+[node name="DecrementButton" type="Button" parent="Control/ItemsContainer/AppleContainer/DetailsContainer/QuantitySelector"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "-"
+
+[node name="QuantityLabel" type="Label" parent="Control/ItemsContainer/AppleContainer/DetailsContainer/QuantitySelector"]
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_ibf8a")
+
+[node name="IncrementButton" type="Button" parent="Control/ItemsContainer/AppleContainer/DetailsContainer/QuantitySelector"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "+"
+
+[node name="PurchaseButton" type="Button" parent="Control/ItemsContainer/AppleContainer/DetailsContainer"]
+layout_mode = 2
+text = "Purchase"
+
+[node name="ItemsContainer2" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.082
+anchor_top = 0.185
+anchor_right = 0.082
+anchor_bottom = 0.185
+offset_left = 490.372
+offset_top = -0.0650024
+offset_right = 973.372
+offset_bottom = 607.935
+
+[node name="MilkContainer" type="HBoxContainer" parent="Control/ItemsContainer2"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="Control/ItemsContainer2/MilkContainer"]
+layout_mode = 2
+texture = ExtResource("6_5uraf")
+expand_mode = 2
+
+[node name="DetailsContainer" type="VBoxContainer" parent="Control/ItemsContainer2/MilkContainer"]
+layout_mode = 2
+script = ExtResource("4_d7i3r")
+
+[node name="FoodName" type="Label" parent="Control/ItemsContainer2/MilkContainer/DetailsContainer"]
+layout_mode = 2
+text = "Milk"
+label_settings = SubResource("LabelSettings_2amsb")
+
+[node name="Price" type="Label" parent="Control/ItemsContainer2/MilkContainer/DetailsContainer"]
+layout_mode = 2
+text = "$7"
+label_settings = SubResource("LabelSettings_wlev1")
+
+[node name="QuantitySelector" type="HBoxContainer" parent="Control/ItemsContainer2/MilkContainer/DetailsContainer"]
+layout_mode = 2
+
+[node name="DecrementButton" type="Button" parent="Control/ItemsContainer2/MilkContainer/DetailsContainer/QuantitySelector"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "-"
+
+[node name="QuantityLabel" type="Label" parent="Control/ItemsContainer2/MilkContainer/DetailsContainer/QuantitySelector"]
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_ibf8a")
+
+[node name="IncrementButton" type="Button" parent="Control/ItemsContainer2/MilkContainer/DetailsContainer/QuantitySelector"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "+"
+
+[node name="PurchaseButton" type="Button" parent="Control/ItemsContainer2/MilkContainer/DetailsContainer"]
+layout_mode = 2
+text = "Purchase"
+
+[node name="EggContainer" type="HBoxContainer" parent="Control/ItemsContainer2"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="Control/ItemsContainer2/EggContainer"]
+layout_mode = 2
+texture = ExtResource("7_e43us")
+expand_mode = 2
+
+[node name="DetailsContainer" type="VBoxContainer" parent="Control/ItemsContainer2/EggContainer"]
+layout_mode = 2
+script = ExtResource("4_d7i3r")
+
+[node name="FoodName" type="Label" parent="Control/ItemsContainer2/EggContainer/DetailsContainer"]
+layout_mode = 2
+text = "Egg"
+label_settings = SubResource("LabelSettings_2amsb")
+
+[node name="Price" type="Label" parent="Control/ItemsContainer2/EggContainer/DetailsContainer"]
+layout_mode = 2
+text = "$3"
+label_settings = SubResource("LabelSettings_wlev1")
+
+[node name="QuantitySelector" type="HBoxContainer" parent="Control/ItemsContainer2/EggContainer/DetailsContainer"]
+layout_mode = 2
+
+[node name="DecrementButton" type="Button" parent="Control/ItemsContainer2/EggContainer/DetailsContainer/QuantitySelector"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "-"
+
+[node name="QuantityLabel" type="Label" parent="Control/ItemsContainer2/EggContainer/DetailsContainer/QuantitySelector"]
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_ibf8a")
+
+[node name="IncrementButton" type="Button" parent="Control/ItemsContainer2/EggContainer/DetailsContainer/QuantitySelector"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "+"
+
+[node name="PurchaseButton" type="Button" parent="Control/ItemsContainer2/EggContainer/DetailsContainer"]
+layout_mode = 2
+text = "Purchase"
+
+[connection signal="pressed" from="Control/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="Control/ItemsContainer/WheatContainer/DetailsContainer/QuantitySelector/DecrementButton" to="Control/ItemsContainer/WheatContainer/DetailsContainer" method="_on_decrement_button_pressed"]
+[connection signal="pressed" from="Control/ItemsContainer/WheatContainer/DetailsContainer/QuantitySelector/IncrementButton" to="Control/ItemsContainer/WheatContainer/DetailsContainer" method="_on_increment_button_pressed"]
+[connection signal="pressed" from="Control/ItemsContainer/WheatContainer/DetailsContainer/PurchaseButton" to="Control/ItemsContainer/WheatContainer/DetailsContainer" method="_on_purchase_button_pressed"]
+[connection signal="pressed" from="Control/ItemsContainer/AppleContainer/DetailsContainer/QuantitySelector/DecrementButton" to="Control/ItemsContainer/AppleContainer/DetailsContainer" method="_on_decrement_button_pressed"]
+[connection signal="pressed" from="Control/ItemsContainer/AppleContainer/DetailsContainer/QuantitySelector/IncrementButton" to="Control/ItemsContainer/AppleContainer/DetailsContainer" method="_on_increment_button_pressed"]
+[connection signal="pressed" from="Control/ItemsContainer/AppleContainer/DetailsContainer/PurchaseButton" to="Control/ItemsContainer/AppleContainer/DetailsContainer" method="_on_purchase_button_pressed"]
+[connection signal="pressed" from="Control/ItemsContainer2/MilkContainer/DetailsContainer/QuantitySelector/DecrementButton" to="Control/ItemsContainer2/MilkContainer/DetailsContainer" method="_on_decrement_button_pressed"]
+[connection signal="pressed" from="Control/ItemsContainer2/MilkContainer/DetailsContainer/QuantitySelector/IncrementButton" to="Control/ItemsContainer2/MilkContainer/DetailsContainer" method="_on_increment_button_pressed"]
+[connection signal="pressed" from="Control/ItemsContainer2/MilkContainer/DetailsContainer/PurchaseButton" to="Control/ItemsContainer2/MilkContainer/DetailsContainer" method="_on_purchase_button_pressed"]
+[connection signal="pressed" from="Control/ItemsContainer2/EggContainer/DetailsContainer/QuantitySelector/DecrementButton" to="Control/ItemsContainer2/EggContainer/DetailsContainer" method="_on_decrement_button_pressed"]
+[connection signal="pressed" from="Control/ItemsContainer2/EggContainer/DetailsContainer/QuantitySelector/IncrementButton" to="Control/ItemsContainer2/EggContainer/DetailsContainer" method="_on_increment_button_pressed"]
+[connection signal="pressed" from="Control/ItemsContainer2/EggContainer/DetailsContainer/PurchaseButton" to="Control/ItemsContainer2/EggContainer/DetailsContainer" method="_on_purchase_button_pressed"]

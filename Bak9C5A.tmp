@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://c8w20t1xk0odl"]
+
+[ext_resource type="Script" path="res://BakeryRoom.gd" id="1_ei1db"]
+[ext_resource type="Texture2D" uid="uid://c6mbkh12htvm8" path="res://bakerybackground.jpg" id="1_w2dsf"]
+[ext_resource type="Script" path="res://Cat.gd" id="3_c3d6i"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_gt42x"]
+font_size = 26
+
+[node name="BakeryRoom" type="Node2D"]
+script = ExtResource("1_ei1db")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(580, 324)
+scale = Vector2(0.594136, 0.6)
+texture = ExtResource("1_w2dsf")
+
+[node name="MoneyCount" type="Label" parent="."]
+offset_left = 24.0
+offset_top = 12.0
+offset_right = 96.0
+offset_bottom = 43.0
+text = "Money"
+label_settings = SubResource("LabelSettings_gt42x")
+
+[node name="Cat" type="Node2D" parent="."]
+script = ExtResource("3_c3d6i")

@@ -1,0 +1,88 @@
+[gd_scene load_steps=6 format=3 uid="uid://cor6i34vyu5vq"]
+
+[ext_resource type="Script" path="res://Kitchen/KitchenInventory.gd" id="1_bto32"]
+[ext_resource type="Texture2D" uid="uid://c1flfcjs1yows" path="res://Images/white.jpg" id="2_b4nnx"]
+[ext_resource type="Texture2D" uid="uid://dkxxuaihrppxp" path="res://Images/bowl.png" id="3_agbx5"]
+[ext_resource type="Texture2D" uid="uid://g6jg60tg5mxr" path="res://Images/uparrow.png" id="5_35n6x"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_lpv80"]
+font_size = 80
+font_color = Color(0, 0, 0, 1)
+
+[node name="Kitchen" type="Node2D"]
+script = ExtResource("1_bto32")
+
+[node name="Background" type="TextureRect" parent="."]
+offset_right = 1153.0
+offset_bottom = 647.0
+texture = ExtResource("2_b4nnx")
+expand_mode = 1
+
+[node name="KitchenName" type="Label" parent="."]
+offset_left = 388.0
+offset_top = 3.0
+offset_right = 761.0
+offset_bottom = 113.0
+text = "Kitchen"
+label_settings = SubResource("LabelSettings_lpv80")
+horizontal_alignment = 1
+
+[node name="BackButton" type="Button" parent="."]
+offset_left = 981.0
+offset_top = 17.0
+offset_right = 1117.0
+offset_bottom = 89.0
+text = "Back"
+
+[node name="Bowl" type="StaticBody2D" parent="." groups=["dropable"]]
+position = Vector2(0, -13)
+disable_mode = 2
+
+[node name="BowlSprite" type="Sprite2D" parent="Bowl"]
+position = Vector2(570, 344)
+scale = Vector2(0.534692, 0.534692)
+texture = ExtResource("3_agbx5")
+
+[node name="BowlWalls" type="CollisionPolygon2D" parent="Bowl"]
+polygon = PackedVector2Array(354, 249, 361, 286, 473, 461, 581, 468, 670, 463, 777, 289, 787, 245, 790, 288, 674, 473, 582, 483, 471, 474, 353, 289)
+one_way_collision = true
+
+[node name="BowlArea" type="Area2D" parent="Bowl"]
+input_pickable = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bowl/BowlArea"]
+polygon = PackedVector2Array(352, 248, 417, 228, 577, 221, 726, 227, 791, 248, 786, 289, 670, 473, 578, 485, 476, 472, 355, 291)
+
+[node name="MenuButton" type="Button" parent="."]
+offset_left = 316.0
+offset_top = 613.0
+offset_right = 836.0
+offset_bottom = 649.0
+icon = ExtResource("5_35n6x")
+icon_alignment = 1
+expand_icon = true
+
+[node name="IngredientPanel" type="Panel" parent="."]
+visible = false
+offset_left = 111.0
+offset_top = 511.0
+offset_right = 1043.0
+offset_bottom = 648.0
+
+[node name="ItemContainer" type="HBoxContainer" parent="IngredientPanel"]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 7.0
+offset_right = 913.0
+offset_bottom = 127.0
+
+[node name="NotEnoughLabel" type="Label" parent="."]
+visible = false
+offset_left = 55.0
+offset_top = 410.0
+offset_right = 653.0
+offset_bottom = 450.0
+text = "You don't have enough"
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="MenuButton" to="." method="_on_menu_button_pressed"]

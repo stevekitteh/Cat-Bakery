@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://w5dkqyl1nfqi"]
+
+[ext_resource type="Script" path="res://TitleScreen.gd" id="1_bahme"]
+[ext_resource type="Texture2D" uid="uid://x7ly2f6te0do" path="res://Images/titlescreen.jpg" id="2_a6own"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_d67hi"]
+font_size = 100
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_bahme")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1153.0
+offset_bottom = 647.0
+texture = ExtResource("2_a6own")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 318.0
+offset_top = 99.0
+offset_right = 840.0
+offset_bottom = 236.0
+text = "Cat Bakery"
+label_settings = SubResource("LabelSettings_d67hi")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 423.0
+offset_top = 353.0
+offset_right = 766.0
+offset_bottom = 485.0
+text = "Start"
+icon_alignment = 1
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -1,0 +1,78 @@
+[gd_scene load_steps=8 format=3 uid="uid://c8w20t1xk0odl"]
+
+[ext_resource type="Script" path="res://BakeryRoom.gd" id="1_ei1db"]
+[ext_resource type="Texture2D" uid="uid://c6mbkh12htvm8" path="res://Images/bakerybackground.jpg" id="1_w2dsf"]
+[ext_resource type="Script" path="res://Cat.gd" id="3_c3d6i"]
+[ext_resource type="Texture2D" uid="uid://6xflf186wruc" path="res://Images/cat.png" id="4_vj0ty"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_gt42x"]
+font_size = 26
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mc2r7"]
+size = Vector2(1152.5, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hqo58"]
+size = Vector2(100, 40)
+
+[node name="BakeryRoom" type="Node2D"]
+script = ExtResource("1_ei1db")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(580, 324)
+scale = Vector2(0.594136, 0.6)
+texture = ExtResource("1_w2dsf")
+
+[node name="MoneyCount" type="Label" parent="."]
+offset_left = 24.0
+offset_top = 12.0
+offset_right = 96.0
+offset_bottom = 43.0
+text = "Money: $0"
+label_settings = SubResource("LabelSettings_gt42x")
+
+[node name="ShopButton" type="Button" parent="."]
+offset_left = 978.0
+offset_top = 15.0
+offset_right = 1137.0
+offset_bottom = 81.0
+text = "Shop"
+
+[node name="InventoryButton" type="Button" parent="."]
+offset_left = 802.0
+offset_top = 15.0
+offset_right = 961.0
+offset_bottom = 81.0
+text = "Inventory"
+
+[node name="KitchenButton" type="Button" parent="."]
+offset_left = 625.0
+offset_top = 15.0
+offset_right = 784.0
+offset_bottom = 81.0
+text = "Kitchen"
+
+[node name="Walls" type="StaticBody2D" parent="."]
+position = Vector2(258, 137)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls"]
+polygon = PackedVector2Array(896, 508, 898, -137, -261, -139, -255, 509, 110, 298, 536, 300)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls"]
+position = Vector2(323.75, 505.5)
+shape = SubResource("RectangleShape2D_mc2r7")
+
+[node name="Cat" type="CharacterBody2D" parent="."]
+position = Vector2(10, 14)
+script = ExtResource("3_c3d6i")
+
+[node name="CatSprite" type="Sprite2D" parent="Cat"]
+position = Vector2(476, 506)
+texture = ExtResource("4_vj0ty")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cat"]
+position = Vector2(470, 552)
+shape = SubResource("RectangleShape2D_hqo58")
+
+[connection signal="pressed" from="ShopButton" to="." method="_on_shop_button_pressed"]
+[connection signal="pressed" from="InventoryButton" to="." method="_on_inventory_button_pressed"]
+[connection signal="pressed" from="KitchenButton" to="." method="_on_kitchen_button_pressed"]
