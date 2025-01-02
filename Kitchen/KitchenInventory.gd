@@ -84,6 +84,7 @@ func _on_area_input(viewport, event, shape_idx, inventory_item):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed and inventory_item.quantity > 0:
 		# Create the Node2D
 		var drag_node = RigidBody2D.new()
+		drag_node.input_pickable = true
 		drag_node.name = "DraggedIngredient"
 		
 		# Attach IngredientMove.gd script

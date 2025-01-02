@@ -48,7 +48,6 @@ func _process(delta):
 		queue_free()  # Remove the item from the scene if it's out of bounds
 		
 func _input_event(viewport, event, shape_idx):
-	print("jfaklfjalsd fjaskdlfjlkasfjklsadf")
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		print("Item clicked!")
 		is_dragging = true
