@@ -6,7 +6,7 @@ var not_enough_money_popup: Popup
 var food_name: Label
 var inventory_database: InventoryDatabase
 
-var food_database = preload("res://Databases/FoodDatabase.tres")  # Load the FoodDatabase resource
+var food_database = preload("res://FoodRecipeDatabase/Databases/FoodDatabase.tres")  # Load the FoodDatabase resource
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

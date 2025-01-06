@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CookedItem" load_steps=6 format=3 uid="uid://bpce31fyn0m8e"]
+
+[ext_resource type="Script" path="res://FoodRecipeDatabase/FoodItems/FoodItem.gd" id="1_sdbnu"]
+[ext_resource type="Resource" uid="uid://3k5k11x11hsu" path="res://FoodRecipeDatabase/FoodItems/Apple.tres" id="2_gueol"]
+[ext_resource type="Resource" uid="uid://d0a3hfl7ycbyn" path="res://FoodRecipeDatabase/FoodItems/Wheat.tres" id="3_wcc5o"]
+[ext_resource type="Script" path="res://FoodRecipeDatabase/CookedItems/CookedItem.gd" id="4_kx3y1"]
+[ext_resource type="Texture2D" uid="uid://bm5vgovcde4j4" path="res://Images/applepie.jpg" id="5_1a0fo"]
+
+[resource]
+script = ExtResource("4_kx3y1")
+name = "Apple Pie"
+description = "A warm dessert made with spiced apples in a flaky crust."
+sprite = ExtResource("5_1a0fo")
+ingredients = Array[ExtResource("1_sdbnu")]([ExtResource("2_gueol"), ExtResource("3_wcc5o")])
+unlocked = false

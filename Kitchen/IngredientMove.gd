@@ -3,6 +3,8 @@ extends RigidBody2D
 # Signals for the inventory
 signal increase_quantity(item)
 signal decrease_quantity(item)
+signal entered_bowl
+signal exited_bowl
 
 var is_dragging : bool = true  # Initially set to true, will allow dragging immediately upon press
 var fall_impulse = Vector2(0, 200)  # Example downward force, adjust as needed
@@ -27,7 +29,6 @@ func _ready():
 	# Ensure this node can receive input events
 	set_process_input(true)
 	
- 
 func _process(delta):
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		if not is_left_mouse_pressed:
@@ -62,14 +63,18 @@ func stop_dragging() -> void:
 
 # Detect when the item enters the bowl
 func _on_Area2D_body_entered(body):
-	if not is_in_bowl:
-		print("Item fell into the bowl!")
-		is_in_bowl = true  # Mark the item as being in the bowl
+	if body == self:
+		if not is_in_bowl:
+			print("Item fell into the bowl!")
+			is_in_bowl = true  # Mark the item as being in the bowl
+			emit_signal("entered_bowl", self)
 		
 func _on_Area2D_body_exited(body):
-	if is_in_bowl:
-		print("Item exited the bowl!")
-		is_in_bowl = false  # Mark the item as being in the bowl
+	if body == self:
+		if is_in_bowl:
+			print("Item exited the bowl!")
+			is_in_bowl = false  # Mark the item as being in the bowl
+			emit_signal("exited_bowl", self)
 		
 func cleanup():
 	# Add any specific logic for cleanup here

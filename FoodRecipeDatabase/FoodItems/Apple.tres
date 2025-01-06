@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="FoodItem" load_steps=3 format=3 uid="uid://3k5k11x11hsu"]
 
-[ext_resource type="Script" path="res://FoodItems/FoodItem.gd" id="1_2kfj6"]
+[ext_resource type="Script" path="res://FoodRecipeDatabase/FoodItems/FoodItem.gd" id="1_2kfj6"]
 [ext_resource type="Texture2D" uid="uid://ciu4pxnhrf0q" path="res://Images/apple.png" id="2_c4wvb"]
 
 [resource]

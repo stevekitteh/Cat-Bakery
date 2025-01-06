@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Recipe" load_steps=6 format=3 uid="uid://7pqboling8p7"]
+
+[ext_resource type="Script" path="res://FoodRecipeDatabase/FoodItems/FoodItem.gd" id="1_7blqj"]
+[ext_resource type="Resource" uid="uid://3k5k11x11hsu" path="res://FoodRecipeDatabase/FoodItems/Apple.tres" id="2_rgs74"]
+[ext_resource type="Resource" uid="uid://d0a3hfl7ycbyn" path="res://FoodRecipeDatabase/FoodItems/Wheat.tres" id="3_n22ro"]
+[ext_resource type="Resource" uid="uid://bpce31fyn0m8e" path="res://FoodRecipeDatabase/CookedItems/ApplePie.tres" id="4_h36b1"]
+[ext_resource type="Script" path="res://FoodRecipeDatabase/Recipes/Recipe.gd" id="5_poesj"]
+
+[resource]
+script = ExtResource("5_poesj")
+name = "Apple Pie Recipe"
+description = "A delightful combination of wholesome grains and sweet, aromatic flavors, waiting to be brought together."
+ingredients = Array[ExtResource("1_7blqj")]([ExtResource("2_rgs74"), ExtResource("3_n22ro")])
+result = ExtResource("4_h36b1")
+unlocked = true

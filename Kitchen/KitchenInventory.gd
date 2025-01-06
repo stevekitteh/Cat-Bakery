@@ -4,21 +4,26 @@ extends Node2D
 @onready var ingredient_panel = $IngredientPanel  # PopupPanel
 @onready var hbox_container = $IngredientPanel/ItemContainer  # Container inside PopupPanel
 @onready var menu_button = $MenuButton  # MenuButton for opening inventory
+@onready var bake_button = $BakeButton  
 @onready var not_enough_label = $NotEnoughLabel
+
+# Preload RecipeManager script
+@onready var recipe_manager : RecipeManager = $RecipeManager
 
 # Popup State
 var button_y: float
 var is_popup_open: bool = false
 
-# List to keep track of dynamically created nodes
-var ingredients = []
-
+var ingredients = [] # List to keep track of dynamically created nodes
+var ingredients_in_bowl = [] # Keep track of ingredients in bowl
 
 func _ready():
+	
 	button_y = menu_button.position.y
 	
 	ingredient_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
-
+	
+	update_bake_button()
 	load_inventory()
 
 # Load Inventory Items into Popup
@@ -87,6 +92,11 @@ func _on_area_input(viewport, event, shape_idx, inventory_item):
 		drag_node.input_pickable = true
 		drag_node.name = "DraggedIngredient"
 		
+		# Store the ingredient data in metadata
+		drag_node.set_meta("ingredient_name", inventory_item.food_item.name)  # Store the ingredient name
+		print(drag_node.get_meta("ingredient_name"))
+		drag_node.set_meta("ingredient_data", inventory_item)  
+		
 		# Attach IngredientMove.gd script
 		drag_node.set_script(preload("res://Kitchen/IngredientMove.gd"))
 		ingredients.append(drag_node)
@@ -113,6 +123,11 @@ func _on_area_input(viewport, event, shape_idx, inventory_item):
 		# Connect the signals for increasing/decreasing quantity
 		drag_node.connect("increase_quantity", Callable(self, "_on_increase_quantity").bind(inventory_item))
 		drag_node.connect("decrease_quantity", Callable(self, "_on_decrease_quantity").bind(inventory_item))
+		
+		# Connect the signals for entering/exiting the bowl
+		if drag_node.connect("entered_bowl", Callable(self, "_on_ingredient_entered_bowl")):
+			print("THE ENTERED BOWL IS CONNECTED")
+		drag_node.connect("exited_bowl", Callable(self, "_on_ingredient_exited_bowl"))
 		
 	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed and inventory_item.quantity <= 0:
 		print("Cannot decrease quantity below 0!")
@@ -151,6 +166,22 @@ func show_fading_message(ingredient: String):
 	# Queue the label to be hidden after the animation ends
 	tween.tween_callback(Callable(self, "_on_tween_complete"))
 	
+func update_bake_button():
+	print("Current ingredients in bowl: ")
+	for ingredient in ingredients_in_bowl:
+		print(ingredient.get_meta("ingredient_name"))
+	
+	# Show the button if there is at least one ingredient in the bowl
+	bake_button.visible = ingredients_in_bowl.size() > 0
+	
+func _on_ingredient_entered_bowl(ingredient):
+	ingredients_in_bowl.append(ingredient)  # Add ingredient to the array
+	update_bake_button()
+
+func _on_ingredient_exited_bowl(ingredient):
+	ingredients_in_bowl.erase(ingredient)  # Remove ingredient from the array
+	update_bake_button()
+	
 func cleanup_ingredients():
 	for ingredient in ingredients:
 		if ingredient != null and ingredient.is_inside_tree():
@@ -173,4 +204,11 @@ func _on_back_button_pressed():
 	print("Back button pressed!")  # Check if the button is responding
 	cleanup_ingredients()
 	get_tree().change_scene_to_file("res://BakeryRoom.tscn")
-	
+
+func _on_bake_button_pressed():
+	# Check if the ingredients in the bowl match the recipe
+	if recipe_manager.bake(ingredients_in_bowl):
+		print("Recipe matched!")
+		# Do the baking process here (e.g., trigger the animation, add baked item to inventory, etc.)
+	else:
+		print("Ingredients do not match the recipe. Try again.")

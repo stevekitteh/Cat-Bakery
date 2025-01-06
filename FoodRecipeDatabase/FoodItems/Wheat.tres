@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="FoodItem" load_steps=3 format=3 uid="uid://d0a3hfl7ycbyn"]
+
+[ext_resource type="Script" path="res://FoodRecipeDatabase/FoodItems/FoodItem.gd" id="1_2o1gn"]
+[ext_resource type="Texture2D" uid="uid://defngwy67br7w" path="res://Images/wheat.png" id="2_0nils"]
+
+[resource]
+script = ExtResource("1_2o1gn")
+name = "Wheat"
+price = 1
+description = "A staple grain used in countless recipes, valued for its versatility and nourishment."
+sprite = ExtResource("2_0nils")
+unlocked = false

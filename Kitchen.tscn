@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cor6i34vyu5vq"]
+[gd_scene load_steps=7 format=3 uid="uid://cor6i34vyu5vq"]
 
 [ext_resource type="Script" path="res://Kitchen/KitchenInventory.gd" id="1_bto32"]
 [ext_resource type="Texture2D" uid="uid://c1flfcjs1yows" path="res://Images/white.jpg" id="2_b4nnx"]
 [ext_resource type="Texture2D" uid="uid://dkxxuaihrppxp" path="res://Images/bowl.png" id="3_agbx5"]
 [ext_resource type="Texture2D" uid="uid://g6jg60tg5mxr" path="res://Images/uparrow.png" id="5_35n6x"]
+[ext_resource type="Script" path="res://Kitchen/RecipeManager.gd" id="5_wp5th"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_lpv80"]
 font_size = 80
@@ -33,6 +34,13 @@ offset_top = 17.0
 offset_right = 1117.0
 offset_bottom = 89.0
 text = "Back"
+
+[node name="BakeButton" type="Button" parent="."]
+offset_left = 876.0
+offset_top = 405.0
+offset_right = 1082.0
+offset_bottom = 501.0
+text = "Bake"
 
 [node name="Bowl" type="StaticBody2D" parent="." groups=["dropable"]]
 position = Vector2(0, -13)
@@ -84,5 +92,9 @@ offset_right = 653.0
 offset_bottom = 450.0
 text = "You don't have enough"
 
+[node name="RecipeManager" type="Node" parent="."]
+script = ExtResource("5_wp5th")
+
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="BakeButton" to="." method="_on_bake_button_pressed"]
 [connection signal="pressed" from="MenuButton" to="." method="_on_menu_button_pressed"]
